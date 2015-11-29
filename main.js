@@ -8,7 +8,7 @@ var Slice = require('./contentSlice').slice,
 
 // slice data
 //module.exports = function(csId, type, area, issueTypes, deliveryFormat, data ) {
-
+var add = new Adder();
 var csId = 11;
 var type = "dateRange";
 var area = 5;
@@ -20,14 +20,31 @@ data.toDate = utils.getRandomToDate();
 
 var myslice = new Slice(csId, type, area, issueTypes, deliveryFormat, data);
 
-var add = new Adder();
-
-add.users(myslice, [5,6,7]);
-add.offer(myslice,11);
-add.offer(myslice,12);
-add.license(myslice, 13);
-add.depositFeed(myslice,14);
-add.dataset(myslice,21);
+db.insert(myslice, function(err,result){
+  if (err)
+    throw err;
+  console.log(result);
 
 
-console.log(myslice);
+  myslice.fromDate = new Date();
+  myslice.toDate = new Date();
+
+  db.update({csId: csId}, myslice, function(err, result) {
+    if (err)
+      throw err;
+    console.log("Update::  ", result);
+
+    add.users(myslice, [5,6,7]);
+    add.offer(myslice,11);
+    add.offer(myslice,12);
+    add.license(myslice, 13);
+    add.depositFeed(myslice,14);
+    add.dataset(myslice,21);
+
+    db.update({csId: csId}, myslice, function(err, result) {
+      if (err)
+        throw err;
+      console.log("Update::::  ", result);
+    });
+  });
+});

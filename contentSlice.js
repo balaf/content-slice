@@ -2,10 +2,14 @@
 
 module.exports.slice = function(csId, type, area, issueTypes, deliveryFormat, data ) {
   this.csId = csId;
-  this.type = type;
-  this.area = area;
-  this.issueTypes = issueTypes;
-  this.deliveryFormat = deliveryFormat;
+  if (type)
+    this.type = type;
+  if (area)
+    this.area = area;
+  if (issueTypes)
+    this.issueTypes = issueTypes;
+  if (deliveryFormat)
+   this.deliveryFormat = deliveryFormat;
 
   this.users = [];
   this.licenses = [];
@@ -13,12 +17,20 @@ module.exports.slice = function(csId, type, area, issueTypes, deliveryFormat, da
   this.depositFeeds = [];
   this.datasets = [];
 
-  this.fromDate = data.fromDate;
-  this.toDate = data.toDate;
-  this.articleType = data.articleType;
-  this.uri = data.uri;
-  this.doi = data.doi;
-  this.tags = data.tags;
+  if (data) {
+    if (data.fromDate)
+      this.fromDate = data.fromDate;
+    if (data.toDate)
+      this.toDate = data.toDate;
+    if (data.articleType)
+      this.articleType = data.articleType;
+    if (data.uri)
+       this.uri = data.uri;
+    if (data.doi)
+      this.doi = data.doi;
+    if(data.tags)
+      this.tags = data.tags;
+  }
 }
 
 module.exports.adder = function() {
