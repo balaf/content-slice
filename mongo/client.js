@@ -1,6 +1,6 @@
 'use strict';
 
-var db = require("./mongo");
+var db = require("./index");
 
 
 var contentSlice = db.collection('contentSlice');

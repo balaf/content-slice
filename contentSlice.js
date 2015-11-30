@@ -1,5 +1,19 @@
 'use strict';
 
+
+module.exports.genericContent = function (obj) {
+  this.csID = obj.ContentID;
+  this.ContentTypeId = obj.ContentTypeId;
+  this.users = [];
+  this.licenses = [];
+  this.offers = [];
+  this.depositFeeds = [];
+  this.datasets = [];
+  this.licOffers = [];
+}
+
+
+
 module.exports.slice = function(csId, type, area, issueTypes, deliveryFormat, data ) {
   this.csId = csId;
   if (type)
